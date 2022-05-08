@@ -13,20 +13,20 @@ Q&A Service server 입니다.
 |DB | H2 Database|
 |Build Tool | Maven
 |Persistence Farmework | Mybatis | 
-| IDE | STS
+| IDE | STS |
 
 * DB ERD
 * ![DB ERD](https://user-images.githubusercontent.com/31990955/167288350-c0db65d1-4c90-4cf5-b1fa-72bbeeb17b58.jpg)
 * API 명세
 
-종류|Stack|
---|--|
-  |Language | Java 11 |
-  |Framework | springBoot |
-  |DB | H2 Database|
-  |Build Tool | Maven
-  |Persistence Farmework | Mybatis | 
-  |IDE| STS |
+Method|EndPoint|Description
+--|--|--|
+|POST | /login | 로그인 수행 |
+|GET | /qna | Q&A 목록 출력 |
+|GET | /qna/{id} | Q&A 상세 조회 |
+|POST | /qna/assign/{id} | Q&A 상담사 할당 |
+|POST | /qna/answer/{id} | Q&A 답변 저장 |
+ 
 
 ---
 ### 2. 실행 방법
