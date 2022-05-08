@@ -6,9 +6,9 @@ Q&A Service server 입니다.
 ### 1. 프로젝트 구성(Server)
 * Environment
  
-*종류|Stack|
-*--|--|
-* |Language | Java 11 |
+종류|Stack|
+* --|--|
+ |Language | Java 11 |
  |Framework | springBoot |
  |DB | H2 Database|
  |Build Tool | Maven
