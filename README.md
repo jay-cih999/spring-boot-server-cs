@@ -15,6 +15,7 @@ Q&A Service server 입니다.
  | IDE | STS
 
 * DB 구조
+![DB ERD](https://user-images.githubusercontent.com/31990955/167288350-c0db65d1-4c90-4cf5-b1fa-72bbeeb17b58.jpg)
 * API 명세
 
 ---
