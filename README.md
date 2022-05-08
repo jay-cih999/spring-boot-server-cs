@@ -19,6 +19,15 @@ Q&A Service server 입니다.
 * ![DB ERD](https://user-images.githubusercontent.com/31990955/167288350-c0db65d1-4c90-4cf5-b1fa-72bbeeb17b58.jpg)
 * API 명세
 
+종류|Stack|
+--|--|
+  |Language | Java 11 |
+  |Framework | springBoot |
+  |DB | H2 Database|
+  |Build Tool | Maven
+  |Persistence Farmework | Mybatis | 
+  |IDE| STS |
+
 ---
 ### 2. 실행 방법
 ---
