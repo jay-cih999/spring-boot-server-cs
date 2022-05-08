@@ -1,5 +1,5 @@
-# spring-boot-server-cs
-customer sevice server 입니다.
+# spring-boot-server-qna
+Q&A Service server 입니다.
 
 ## 고객문의 접수 & 답변 서버 개발 입니다.
 
