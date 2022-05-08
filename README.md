@@ -4,7 +4,7 @@ Q&A Service server 입니다.
 ## 고객문의 접수 & 답변 서버 개발 입니다.
 
 ### 1. 프로젝트 구성(Server)
-
+* Environment
 종류|Stack|
 --|--|
  |Language | Java 11 |
@@ -14,7 +14,7 @@ Q&A Service server 입니다.
  |Persistence Farmework | Mybatis | 
  | IDE | STS
 
-* DB 구조
+* DB ERD
 * ![DB ERD](https://user-images.githubusercontent.com/31990955/167288350-c0db65d1-4c90-4cf5-b1fa-72bbeeb17b58.jpg)
 * API 명세
 
