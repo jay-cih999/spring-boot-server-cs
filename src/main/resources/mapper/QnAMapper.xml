@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.jay.qna.mapper.QnAMapper">
+
+	<resultMap id="qna" type="QnADao">
+	   <id property="id" column="ID" />
+	   <id property="customer_id" column="CUSTOMER_ID" />
+	   <id property="name" column="NAME" />
+	   <id property="title" column="TITLE" />
+	   <id property="contents" column="CONTENTS" />
+	   <id property="createdAt" column="CREATEDAT" />
+	   <id property="status" column="STATUS" />
+	   <id property="managerId" column="MANAGERID" />
+	   <id property="managerName" column="MANAGERNAME" />
+	       <association property="answer" resultMap="answerDao" columnPrefix="A_" />	            	            
+	</resultMap>
+	<resultMap id="answerDao" type="AnswerDao">
+	   <id property="id" column="ID" />
+	   <id property="reply" column="REPLY" />
+	   <id property="qna_id" column="QNA_ID" />
+	   <id property="createdAt" column="CREATEDAT" />
+   </resultMap>
+	<insert id="addQnA" parameterType="QnADao">
+		INSERT INTO QNA (	
+						CUSTOMER_ID, NAME, TITLE, CONTENTS, CREATEDAT, STATUS, PASSWORD
+					)
+		VALUES (
+			#{customer_id}, #{name}, #{title}, #{contents}, CURRENT_TIMESTAMP(), 'submit', #{password}
+		)
+	</insert>
+	
+	<select id="findAll" resultType="QnADao">
+		SELECT 	q.ID, q.CUSTOMER_ID, q.NAME, q.TITLE, q.CONTENTS, q.CREATEDAT, q.STATUS,
+				q.MANAGERID, (SELECT NAME FROM USERS WHERE ID = q.MANAGERID) AS MANAGERNAME,
+				(SELECT CREATEDAT FROM ANSWER WHERE QNA_ID = q.ID) AS ANSWEREDAT
+		FROM	QNA q
+		WHERE 	1=1
+				<if test="statusList != null">
+				AND q.STATUS IN 
+					<foreach item="status" collection="statusList" separator="," open="(" close=")">
+	        			#{status}
+	    			</foreach>
+				</if>
+				<if test="name != null">
+				AND q.NAME like '%'||#{name}||'%'
+				</if>
+				<if test="title != null">
+				AND q.TITLE like '%'||#{title}||'%'
+				</if>
+				<if test="customer_id != null">
+				AND q.CUSTOMER_ID like '%'||#{customer_id}||'%'
+				</if>	 	 
+	</select>
+	
+	<select id="findOne" resultMap="qna">
+		SELECT 	q.ID, q.CUSTOMER_ID, q.NAME, q.TITLE, q.CONTENTS, q.CREATEDAT, q.STATUS, 
+				q.MANAGERID, (SELECT NAME FROM USERS WHERE ID = q.MANAGERID) AS MANAGERNAME,
+				a.id as A_ID,
+				a.reply as A_REPLY,
+				a.createdAt as A_CREATEDAT,
+				a.qna_id as A_QNA_ID
+		FROM	QNA q LEFT OUTER JOIN ANSWER a ON q.ID = a.QNA_ID 
+		WHERE 	1=1
+				<if test="id != null">
+				AND q.ID = #{id}
+				</if>
+				 
+	</select>
+	
+	<update id="assignQna" parameterType="QnADao">
+		UPDATE QNA SET MANAGERID = #{managerId}, STATUS = 'assign', ASSIGNEDAT = CURRENT_TIMESTAMP() WHERE ID = #{id}
+	</update>
+	
+	<insert id="insertAnswer" parameterType="AnswerDao">
+		INSERT INTO ANSWER ( REPLY, QNA_ID, CREATEDAT) VALUES ( #{reply}, #{qna_id}, CURRENT_TIMESTAMP() )
+	</insert>
+	
+	<update id="updateStatus" parameterType="QnADao">
+		UPDATE QNA SET STATUS = #{status} WHERE ID = #{id}		
+	</update>
+	
+	<update id="updateStatusComplete" parameterType="QnADao">
+		UPDATE QNA SET STATUS = 'complete' WHERE ID = #{id}
+	</update>
+
+	<select id="findOneWithPassword" resultMap="qna">
+		SELECT 	q.ID, q.CUSTOMER_ID, q.NAME, q.TITLE, q.CONTENTS, q.CREATEDAT, q.STATUS, 
+				q.MANAGERID, (SELECT NAME FROM USERS WHERE ID = q.MANAGERID) AS MANAGERNAME,				
+		FROM	QNA q  
+		WHERE 	1=1
+				
+				AND q.ID = #{id} 
+				AND q.PASSWORD = #{password} 
+	</select>
+	
+</mapper>
