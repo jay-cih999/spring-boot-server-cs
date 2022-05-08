@@ -6,14 +6,14 @@ Q&A Service server 입니다.
 ### 1. 프로젝트 구성(Server)
 * Environment
  
-종류|Stack|
- --|--|
- |Language | Java 11 |
- |Framework | springBoot |
- |DB | H2 Database|
- |Build Tool | Maven
- |Persistence Farmework | Mybatis | 
- | IDE | STS
+·· 종류|Stack|
+·· --|--|
+·· |Language | Java 11 |
+·· |Framework | springBoot |
+·· |DB | H2 Database|
+·· |Build Tool | Maven
+·· |Persistence Farmework | Mybatis | 
+·· | IDE | STS
 
 * DB ERD
 * ![DB ERD](https://user-images.githubusercontent.com/31990955/167288350-c0db65d1-4c90-4cf5-b1fa-72bbeeb17b58.jpg)
